@@ -8,6 +8,7 @@ import org.andengine.engine.camera.Camera;
 import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
+import org.andengine.engine.options.WakeLockOptions;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.Scene;
@@ -22,11 +23,15 @@ import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.ui.activity.BaseGameActivity;
 
 public class GameActivity extends BaseGameActivity {
+	private Camera camera;
 	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
-		final Camera camera = new Camera(0, 0, 480, 800);
-		return new EngineOptions(true, ScreenOrientation.PORTRAIT_FIXED, new RatioResolutionPolicy(480, 860), camera);
+		camera = new Camera(0,0,480,860);
+		EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.PORTRAIT_FIXED, new RatioResolutionPolicy(480,860), this.camera);
+	    engineOptions.getAudioOptions().setNeedsMusic(true).setNeedsSound(true);
+	    engineOptions.setWakeLockOptions(WakeLockOptions.SCREEN_ON);
+	    return engineOptions;
 	}
 
     @Override
