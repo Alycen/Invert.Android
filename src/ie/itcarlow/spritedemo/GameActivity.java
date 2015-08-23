@@ -1,5 +1,7 @@
 package ie.itcarlow.spritedemo;
 
+import ie.itcarlow.spritedemo.manager.ResourceManager;
+
 import java.io.IOException;
 
 import org.andengine.engine.Engine;
@@ -24,6 +26,7 @@ import org.andengine.ui.activity.BaseGameActivity;
 
 public class GameActivity extends BaseGameActivity {
 	private Camera camera;
+	private ResourceManager resourceManager;
 	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
@@ -39,8 +42,11 @@ public class GameActivity extends BaseGameActivity {
        OnCreateResourcesCallback pOnCreateResourcesCallback)
 			throws IOException {
 
-    	 loadGfx();
-		 pOnCreateResourcesCallback.onCreateResourcesFinished();
+        loadGfx();
+        
+    	ResourceManager.prepareManager(mEngine, this, camera, getVertexBufferObjectManager());
+        resourceManager = ResourceManager.getInstance();
+        pOnCreateResourcesCallback.onCreateResourcesFinished();
     }
 
     private void loadGfx() {     
