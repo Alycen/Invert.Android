@@ -16,8 +16,10 @@ import org.andengine.util.debug.Debug;
 import ie.itcarlow.spritedemo.GameActivity;
 
 public class ResourceManager {
-    
     private static final ResourceManager INSTANCE = new ResourceManager();
+    
+    public ITextureRegion splash_Region;
+    private BitmapTextureAtlas splashTextureAtlas;
     
     public Engine engine;
     public GameActivity activity;
@@ -56,11 +58,15 @@ public class ResourceManager {
     }
     
     public void loadSplashScreen() {
-    
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+    	splashTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+    	splash_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas, activity, "mario10.png", 0, 0);
+    	splashTextureAtlas.load();
     }
     
     public void unloadSplashScreen() {
-
+    	splashTextureAtlas.unload();
+    	splash_Region = null;
     }
     
     /**

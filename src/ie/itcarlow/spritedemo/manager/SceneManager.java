@@ -1,8 +1,10 @@
 package ie.itcarlow.spritedemo.manager;
 
 import org.andengine.engine.Engine;
+import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 
 import ie.itcarlow.spritedemo.base.BaseScene;
+import ie.itcarlow.spritedemo.scene.SplashScene;
 
 public class SceneManager {
     private BaseScene splashScene;
@@ -30,6 +32,14 @@ public class SceneManager {
         currentScene = scene;
         currentSceneType = scene.getSceneType();
     }
+    
+    public void createSplashScene(OnCreateSceneCallback pOnCreateSceneCallback){
+        ResourceManager.getInstance().loadSplashScreen();
+        splashScene = new SplashScene();
+        currentScene = splashScene;
+        pOnCreateSceneCallback.onCreateSceneFinished(splashScene);
+    }
+
     
     public void setScene(SceneType sceneType){
         switch (sceneType){
@@ -60,5 +70,11 @@ public class SceneManager {
     
     public BaseScene getCurrentScene(){
         return currentScene;
+    }
+    
+    private void disposeSplashScene(){
+        ResourceManager.getInstance().unloadSplashScreen();
+        splashScene.disposeScene();
+        splashScene = null;
     }
 }
