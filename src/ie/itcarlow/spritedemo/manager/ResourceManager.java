@@ -21,6 +21,9 @@ public class ResourceManager {
     public ITextureRegion splash_Region;
     private BitmapTextureAtlas splashTextureAtlas;
     
+    public ITextureRegion menu_background_Region;
+    private BuildableBitmapTextureAtlas menuTextureAtlas;
+    
     public Engine engine;
     public GameActivity activity;
     public Camera camera;
@@ -38,7 +41,16 @@ public class ResourceManager {
     }
     
     private void loadMenuGraphics() {
-        
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menu/");
+    	menuTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR);
+    	menu_background_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "bg01.png");     
+    	try {
+    	    this.menuTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
+    	    this.menuTextureAtlas.load();
+    	} 
+    	catch (final TextureAtlasBuilderException e){
+    	        Debug.e(e);
+    	}
     }
     
     private void loadMenuAudio() {
@@ -60,7 +72,7 @@ public class ResourceManager {
     public void loadSplashScreen() {
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
     	splashTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
-    	splash_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas, activity, "mario10.png", 0, 0);
+    	splash_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(splashTextureAtlas, activity, "splash.png", 0, 0);
     	splashTextureAtlas.load();
     }
     

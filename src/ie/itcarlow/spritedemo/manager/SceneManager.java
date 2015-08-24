@@ -4,6 +4,7 @@ import org.andengine.engine.Engine;
 import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 
 import ie.itcarlow.spritedemo.base.BaseScene;
+import ie.itcarlow.spritedemo.scene.MainMenuScene;
 import ie.itcarlow.spritedemo.scene.SplashScene;
 
 public class SceneManager {
@@ -40,6 +41,12 @@ public class SceneManager {
         pOnCreateSceneCallback.onCreateSceneFinished(splashScene);
     }
 
+    public void createMenuScene() {
+    	ResourceManager.getInstance().loadMenuResources();
+    	menuScene = new MainMenuScene();
+    	setScene(menuScene);
+    	disposeSplashScene();
+    }
     
     public void setScene(SceneType sceneType){
         switch (sceneType){

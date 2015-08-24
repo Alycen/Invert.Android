@@ -75,6 +75,7 @@ public class GameActivity extends BaseGameActivity {
                     // set menu scene using scene manager
                     // disposeSplashScene();
                     // READ NEXT ARTICLE FOR THIS PART.
+                    SceneManager.getInstance().createMenuScene();
                 }
         }));
         pOnPopulateSceneCallback.onPopulateSceneFinished();
@@ -84,39 +85,4 @@ public class GameActivity extends BaseGameActivity {
     public Engine onCreateEngine(EngineOptions pEngineOptions) {
     	return new LimitedFPSEngine(pEngineOptions, 60);
     }
-    
-	/*@Override
-	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
-		// TODO Auto-generated method stub
-		//count10Sprite.setPosition(pSceneTouchEvent.getX(), pSceneTouchEvent.getY());
-		//Get difference between count10Sprite.pos and pSceneTouchEvent.pos
-		velocity = new Vector(pSceneTouchEvent.getX() - count10Sprite.getX(), pSceneTouchEvent.getY() - count10Sprite.getY());
-		count10Sprite.setPosition(count10Sprite.getX() + velocity.getX(), count10Sprite.getY() + velocity.getY());
-		
-		
-		return false;
-	}
-*/
-	/*@Override
-	public void onUpdate(float pSecondsElapsed) {
-		// TODO Auto-generated method stub
-		//count10Sprite.setPosition(count10Sprite.getX() + 1, count10Sprite.getY() + 1);
-		if (count10Sprite.collidesWith(mBear) ) {
-			count10Sprite.setColor(1.0f, 0.0f, 0.0f);
-			mBear.setPosition(velocity.getX()+ mBear.getX(), velocity.getY() + mBear.getY());
-		}
-		else {
-			count10Sprite.setColor(0.0f, 1.0f, 0.0f);
-		}
-		
-		if (mBear.getX() > CAMERA_WIDTH || mBear.getX() < 0 || mBear.getY() > CAMERA_HEIGHT || mBear.getY() < 0) {
-			mScene.detachChild(mBear);
-		}
-	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}*/
 }
