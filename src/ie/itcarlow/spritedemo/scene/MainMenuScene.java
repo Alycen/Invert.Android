@@ -27,6 +27,23 @@ public class MainMenuScene extends BaseScene {
 		createBackground();
 	}
 
+	public boolean onMenuItem(MainMenuScene pMenuScene, IMenuItem pMenuItem, float X, float Y) {
+		switch(pMenuItem.getID()){
+		case MENU_PLAY:
+			//load game
+			// SceneManager.getInstance().loadGameScene(engine);
+			return true;
+		case MENU_SETTINGS:
+			// SceneManager.getInstance().loadSettingsScene(engine);
+			return true;
+		case MENU_QUIT:
+			System.exit(0);
+			return true;
+		default:
+			return false;
+		}
+	}
+	
 	@Override
 	public void onBackKeyPressed() {
 		System.exit(0);		

@@ -27,6 +27,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.ui.activity.BaseGameActivity;
 
+import android.view.KeyEvent;
+
 public class GameActivity extends BaseGameActivity {
 	private Camera camera;
 	private ResourceManager resourceManager;
@@ -85,4 +87,18 @@ public class GameActivity extends BaseGameActivity {
     public Engine onCreateEngine(EngineOptions pEngineOptions) {
     	return new LimitedFPSEngine(pEngineOptions, 60);
     }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+    	if (keyCode == KeyEvent.KEYCODE_BACK) 
+    		SceneManager.getInstance().getCurrentScene().onBackKeyPressed();
+    	return false;
+    }
+    
+    @Override 
+    protected void onDestroy() {
+    	super.onDestroy();
+    	System.exit(0);
+    }
+    
 }

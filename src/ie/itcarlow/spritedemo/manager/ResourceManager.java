@@ -2,6 +2,7 @@ package ie.itcarlow.spritedemo.manager;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
+import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -10,6 +11,7 @@ import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSourc
 import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
 import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.debug.Debug;
 
@@ -24,6 +26,10 @@ public class ResourceManager {
     public ITextureRegion menu_background_Region;
     private BuildableBitmapTextureAtlas menuTextureAtlas;
     
+    public ITiledTextureRegion loading_Region;
+    private BitmapTextureAtlas loadingTextureAtlas;
+    public AnimatedSprite loadingSprite;
+    
     public Engine engine;
     public GameActivity activity;
     public Camera camera;
@@ -32,6 +38,7 @@ public class ResourceManager {
     public void loadMenuResources() {
         loadMenuGraphics();
         loadMenuAudio();
+        loadLoadingScreen();
     }
     
     public void loadGameResources() {
@@ -79,6 +86,21 @@ public class ResourceManager {
     public void unloadSplashScreen() {
     	splashTextureAtlas.unload();
     	splash_Region = null;
+    }
+    
+    public void loadLoadingScreen() {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+    	loadingTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(),800,100,TextureOptions.BILINEAR);
+    	loading_Region = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(loadingTextureAtlas, activity, "loading.png",0,0,8,1);
+    	loadingTextureAtlas.load();
+    }
+    
+    public void unloadMenuTextures() {
+    	menuTextureAtlas.unload();
+    }
+    
+    public void loadMenuTextures() {
+    	menuTextureAtlas.load();
     }
     
     /**
