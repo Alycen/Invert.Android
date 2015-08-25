@@ -20,15 +20,25 @@ import ie.itcarlow.spritedemo.GameActivity;
 public class ResourceManager {
     private static final ResourceManager INSTANCE = new ResourceManager();
     
+    // ******************** //
     public ITextureRegion splash_Region;
     private BitmapTextureAtlas splashTextureAtlas;
-    
+    // ******************** //
     public ITextureRegion menu_background_Region;
     private BuildableBitmapTextureAtlas menuTextureAtlas;
-    
+    // ******************** //
+    public BuildableBitmapTextureAtlas gameTextureAtlas;
+    // ******************** //
     public ITiledTextureRegion loading_Region;
     private BitmapTextureAtlas loadingTextureAtlas;
     public AnimatedSprite loadingSprite;
+    // ******************** //
+    public ITiledTextureRegion player_Region;
+    public AnimatedSprite playerSprite;
+    // ******************** //
+    public ITextureRegion block_Region;
+    private BitmapTextureAtlas blackTextureAtlas;
+    // ******************** //
     
     public Engine engine;
     public GameActivity activity;
@@ -46,11 +56,22 @@ public class ResourceManager {
         loadGameFonts();
         loadGameAudio();
     }
+
+    public void loadPlayerGraphics(BuildableBitmapTextureAtlas bbmta) {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+    	player_Region = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(bbmta, activity, "playerMint.png", 10, 1);
+    }
+    
+    public void loadBlockGraphics(BuildableBitmapTextureAtlas bbmta) {
+    	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+    	block_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bbmta, activity, "block2.png");
+    }
     
     private void loadMenuGraphics() {
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/menu/");
     	menuTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 1024, 1024, TextureOptions.BILINEAR);
     	menu_background_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(menuTextureAtlas, activity, "bg01.png");     
+    	loadPlayerGraphics(menuTextureAtlas);
     	try {
     	    this.menuTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 1, 0));
     	    this.menuTextureAtlas.load();
@@ -65,7 +86,18 @@ public class ResourceManager {
     }
 
     private void loadGameGraphics() {
+        BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+        gameTextureAtlas = new BuildableBitmapTextureAtlas(activity.getTextureManager(), 1024,1024,TextureOptions.BILINEAR);
         
+        loadPlayerGraphics(gameTextureAtlas);
+        loadBlockGraphics(gameTextureAtlas);
+        try { 
+        	this.gameTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0,1,0));
+        	this.gameTextureAtlas.load();
+        }
+        catch(final TextureAtlasBuilderException e) {
+        	Debug.e(e);
+        }
     }
     
     private void loadGameFonts() {
@@ -97,6 +129,10 @@ public class ResourceManager {
     
     public void unloadMenuTextures() {
     	menuTextureAtlas.unload();
+    }
+    
+    public void unloadGameTextures() {
+    	
     }
     
     public void loadMenuTextures() {

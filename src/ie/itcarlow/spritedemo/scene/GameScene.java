@@ -6,6 +6,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.util.adt.color.Color;
 
 import ie.itcarlow.spritedemo.base.BaseScene;
+import ie.itcarlow.spritedemo.manager.SceneManager;
 import ie.itcarlow.spritedemo.manager.SceneManager.SceneType;
 
 public class GameScene extends BaseScene {
@@ -22,7 +23,7 @@ public class GameScene extends BaseScene {
 
 	@Override
 	public void onBackKeyPressed() {
-
+		SceneManager.getInstance().loadMenuScene(engine);
 	}
 
 	@Override
@@ -32,6 +33,9 @@ public class GameScene extends BaseScene {
 
 	@Override
 	public void disposeScene() {
-
+		camera.setHUD(null);
+		camera.setCenter(240,430);
+		// TODO code responsible for disposing scene
+		// removing all game objects
 	}
 }

@@ -10,6 +10,7 @@ import org.andengine.opengl.util.GLState;
 
 import ie.itcarlow.spritedemo.base.BaseScene;
 import ie.itcarlow.spritedemo.manager.ResourceManager;
+import ie.itcarlow.spritedemo.manager.SceneManager;
 import ie.itcarlow.spritedemo.manager.SceneManager.SceneType;
 
 public class MainMenuScene extends BaseScene {
@@ -31,7 +32,7 @@ public class MainMenuScene extends BaseScene {
 		switch(pMenuItem.getID()){
 		case MENU_PLAY:
 			//load game
-			// SceneManager.getInstance().loadGameScene(engine);
+			SceneManager.getInstance().loadGameScene(engine);
 			return true;
 		case MENU_SETTINGS:
 			// SceneManager.getInstance().loadSettingsScene(engine);
@@ -53,6 +54,15 @@ public class MainMenuScene extends BaseScene {
 	public void disposeScene() {
 		// TODO Auto-generated method stub
 	}
+	
+	/*public void checkMenu() {
+		if (activity.Player.top() < 0)
+			MENU_QUIT;
+		if (activity.Player.right() > screenWidth)
+			MENU_SETTINGS;
+		else if (activity.Player.left() < 0)
+			MENU_PLAY;
+	}*/
 	
 	private void createBackground(){
 	    attachChild(new Sprite(240, 430, resourceManager.menu_background_Region, vbom){
