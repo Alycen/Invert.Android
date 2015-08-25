@@ -36,7 +36,9 @@ public class ResourceManager {
     public ITiledTextureRegion player_Region;
     public AnimatedSprite playerSprite;
     // ******************** //
-    public ITextureRegion block_Region;
+    public ITextureRegion block1_Region;
+    public ITextureRegion block2_Region;
+    public ITextureRegion finish_Region;
     private BitmapTextureAtlas blackTextureAtlas;
     // ******************** //
     
@@ -64,7 +66,9 @@ public class ResourceManager {
     
     public void loadBlockGraphics(BuildableBitmapTextureAtlas bbmta) {
     	BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-    	block_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bbmta, activity, "block2.png");
+    	block1_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bbmta, activity, "block1.png");
+    	block2_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bbmta, activity, "block2.png");
+    	finish_Region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(bbmta, activity, "finish.png");
     }
     
     private void loadMenuGraphics() {

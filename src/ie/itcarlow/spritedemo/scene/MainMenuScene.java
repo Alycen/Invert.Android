@@ -8,6 +8,7 @@ import org.andengine.entity.scene.menu.item.decorator.ScaleMenuItemDecorator;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.opengl.util.GLState;
 
+import ie.itcarlow.spritedemo.Player;
 import ie.itcarlow.spritedemo.base.BaseScene;
 import ie.itcarlow.spritedemo.manager.ResourceManager;
 import ie.itcarlow.spritedemo.manager.SceneManager;
@@ -18,6 +19,8 @@ public class MainMenuScene extends BaseScene {
 	private final int MENU_SETTINGS = 1;
 	private final int MENU_QUIT = 2;
 	
+	//private Player player = new Player(0,0,40,40,0);
+	
 	@Override
 	public SceneType getSceneType() {
 		return SceneType.SCENE_MENU;
@@ -26,6 +29,7 @@ public class MainMenuScene extends BaseScene {
 	@Override
 	public void createScene() {
 		createBackground();
+	    //attachChild(player.getSprite());
 	}
 
 	public boolean onMenuItem(MainMenuScene pMenuScene, IMenuItem pMenuItem, float X, float Y) {
@@ -73,4 +77,6 @@ public class MainMenuScene extends BaseScene {
 	        }
 	    });
 	}
+	
+	
 }
