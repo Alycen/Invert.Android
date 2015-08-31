@@ -33,6 +33,7 @@ public class GameActivity extends BaseGameActivity {
 	private Camera camera;
 	private ResourceManager resourceManager;
 	
+	
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		camera = new Camera(0,0,480,860);
@@ -76,7 +77,7 @@ public class GameActivity extends BaseGameActivity {
                     // load menu resources, create menu scene
                     // set menu scene using scene manager
                     // disposeSplashScene();
-                    // READ NEXT ARTICLE FOR THIS PART.
+                    // play game music when splash screens finished
                     SceneManager.getInstance().createMenuScene();
                 }
         }));

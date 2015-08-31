@@ -19,7 +19,7 @@ public class MainMenuScene extends BaseScene {
 	private final int MENU_SETTINGS = 1;
 	private final int MENU_QUIT = 2;
 	
-	//private Player player = new Player(0,0,40,40,0);
+	private Player player;
 	
 	@Override
 	public SceneType getSceneType() {
@@ -29,7 +29,8 @@ public class MainMenuScene extends BaseScene {
 	@Override
 	public void createScene() {
 		createBackground();
-	    //attachChild(player.getSprite());
+		player = new Player(20, 40 ,vbom);
+	    //attachChild(player);
 	}
 
 	public boolean onMenuItem(MainMenuScene pMenuScene, IMenuItem pMenuItem, float X, float Y) {
@@ -39,7 +40,7 @@ public class MainMenuScene extends BaseScene {
 			SceneManager.getInstance().loadGameScene(engine);
 			return true;
 		case MENU_SETTINGS:
-			// SceneManager.getInstance().loadSettingsScene(engine);
+			//SceneManager.getInstance().loadSettingsScene(engine);
 			return true;
 		case MENU_QUIT:
 			System.exit(0);
@@ -67,6 +68,10 @@ public class MainMenuScene extends BaseScene {
 		else if (activity.Player.left() < 0)
 			MENU_PLAY;
 	}*/
+	
+	private void playMFX() {
+		
+	}
 	
 	private void createBackground(){
 	    attachChild(new Sprite(240, 430, resourceManager.menu_background_Region, vbom){

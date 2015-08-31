@@ -15,7 +15,7 @@ public class Block {
 	
 	protected float width;
 	protected float height;
-	public float[] top,bottom,left,right;
+	protected int type;
 	
 	protected ITextureRegion tex_Region;
 	
@@ -24,41 +24,27 @@ public class Block {
 		position.y = Y;
 		width = 20;
 		height = 20;
-		if(type==1)
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().block1_Region,ResourceManager.getInstance().vbom);
-		else if(type==2)
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().block2_Region,ResourceManager.getInstance().vbom);
-		else
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().player_Region,ResourceManager.getInstance().vbom);
+		makeSprite();
 	}
 	
-	public Block(float X, float Y, float w, float h,int type) {
+	public Block(float X, float Y, float w, float h,int t) {
 		position.x = X;
 		position.y = Y;
 		width = w;
 		height = h;
-		if(type==1)
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().block1_Region,ResourceManager.getInstance().vbom);
-		else if(type==2)
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().block2_Region,ResourceManager.getInstance().vbom);
-		else
-			sprite = new Sprite(position.x,position.y,ResourceManager.getInstance().player_Region,ResourceManager.getInstance().vbom);
+		type = t;
+		makeSprite();
 	}
 	
-	public float[] top() {
-		return top;
-	}
+	protected void makeSprite() {
+		if (type == 1)
+			tex_Region = ResourceManager.getInstance().block1_Region;
+		else if (type == 2)
+			tex_Region = ResourceManager.getInstance().block2_Region;
+		else if (type == 3)
+		  	tex_Region = ResourceManager.getInstance().finish_Region;
 	
-	public float[] bottom() {
-		return bottom;
-	}
-	
-	public float[] left() {
-		return left;
-	}
-	
-	public float[] right() {
-		return right;
+		sprite = new Sprite(position.x, position.y, tex_Region, ResourceManager.getInstance().vbom);
 	}
 	
 	protected void Move() {
@@ -66,40 +52,10 @@ public class Block {
 	}
 	
 	public void Update(long time) {
-		top[0] = position.x;
-		top[1] = position.y;
-		top[2] = position.x + width;
-		top[3] = position.y;
 		
-		bottom[0] = position.x;
-		bottom[1] = position.y + height;
-		bottom[2] = position.x + width;
-		bottom[3] = position.y + height;
-		
-		left[0] = position.x;
-		left[1] = position.y;
-		left[2] = position.x;
-		left[3] = position.y + height;
-		
-		right[0] = position.x + width;
-		right[1] = position.y;
-		right[2] = position.x + width;
-		right[3] = position.y + height;
 	}
 	
-	public boolean isColliding(Block b) {
-		if(b.bottom[1] > top[1] && b.left[0] > right[0] || b.right[0] < left[0]) // colliding at the bottom of b
-			return true;
-		else if (b.top[1] < bottom[1] && b.left[0] > right[0] || b.right[0] < left[0]) // colliding at the top of b
-			return true;
-		if(b.left[0] > right[0] && b.bottom[1] > top[1] || b.top[1] < bottom[1]) // colliding at the left of b
-			return true;
-		else if (b.right[0] < left[0] && b.bottom[11] > top[1] || b.top[1] < bottom[1]) // colliding at the right of b
-			return true;
-		else 
-			return false;
-	}
-	
+
 	public Sprite getSprite(){
 		return sprite;
 	}
